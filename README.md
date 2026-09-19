@@ -1,93 +1,48 @@
-# picoagents
 
-A tiny, from-scratch agent skeleton: `Agent` → `ChatModel` → LLM API → response.
+# PicoAgents – Agentic AI Chatbot
 
-Currently wired to **Groq's free tier** (no credit card required, OpenAI-compatible API).
+A Python-based Agentic AI chatbot powered by Large Language Models (LLMs). This project demonstrates AI-powered conversations using a modular architecture.
 
-```text
-main.py
-  │
-  ▼
-Agent.run(prompt)
-  │
-  ▼
-messages = [{"role": "user", "content": prompt}]
-  │
-  ▼
-model.complete(messages)   ← GroqModel, defined in model.py
-  │
-  ▼
-Groq API (OpenAI-compatible)
-  │
-  ▼
-response (str)
-  │
-  ▼
-print(response)
-```
+## Features
+- LLM-powered chatbot
+- Modular agent architecture
+- Groq API integration
+- Python-based implementation
 
-## Files
+## Technologies Used
+- Python
+- Groq API
+- Large Language Models (LLMs)
 
-| File | Purpose |
-|---|---|
-| `main.py` | Entry point. Wires `GroqModel` into `Agent`, runs one prompt. |
-| `agent.py` | `Agent` class — knows nothing about any specific provider. |
-| `model.py` | `ChatModel` protocol + `GroqModel` (active) + `OpenAIModel` (kept for reference — swap back by importing it in `main.py` and setting `OPENAI_API_KEY` in `.env`). |
-| `requirements.txt` | `openai` (used for both Groq and OpenAI — Groq is OpenAI-compatible) + `python-dotenv`. |
-| `.env` | Your real API key goes here. Never commit this. |
-| `.env.example` | Template showing what `.env` should contain. |
-| `.gitignore` | Excludes `.env`, virtual envs, and Python cache files from git. |
+## Project Structure
+- `main.py` – Application entry point
+- `agent.py` – Agent logic
+- `model.py` – LLM integration
+- `requirements.txt` – Project dependencies
 
-## 1. Install dependencies
+## Setup and Installation
 
-```bash
-python -m venv .venv
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/suriyaxb-web/Picoagents.git
+   ```
 
-Activate it:
-- macOS/Linux: `source .venv/bin/activate`
-- Windows PowerShell: `.venv\Scripts\Activate.ps1`
-- Windows cmd.exe: `.venv\Scripts\activate.bat`
+2. Navigate to the project folder:
+   ```bash
+   cd Picoagents
+   ```
 
-Then:
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-pip install -r requirements.txt
-```
+4. Configure your Groq API key using a `.env` file.
 
-## 2. Configure environment variables
+5. Run the application:
+   ```bash
+   python main.py
+   ```
 
-Get a free API key (no credit card) at **https://console.groq.com/keys**.
-
-Open `.env` and replace the placeholder:
-
-```text
-GROQ_API_KEY=your_key_here
-```
-
-with your real key.
-
-## 3. Run it
-
-```bash
-python main.py
-```
-
-Entry point / main command: **`python main.py`**
-
-You should see a short response printed to the terminal within about a second — Groq's inference is unusually fast.
-
-## Troubleshooting
-
-- `ModuleNotFoundError: No module named 'openai'` → venv not activated, or VS Code is using a different Python interpreter than your terminal (Command Palette → "Python: Select Interpreter" → pick the one inside `.venv`).
-- `RuntimeError: No Groq API key found` → `.env` still has the placeholder, or you're running from a different working directory than where `.env` lives.
-- `AuthenticationError` → key was copied incorrectly (extra space, truncated, or revoked).
-
-## Switching back to OpenAI
-
-`OpenAIModel` is still defined in `model.py`. To use it instead:
-
-1. In `main.py`, change `from model import GroqModel` to `from model import OpenAIModel`, and `model = GroqModel()` to `model = OpenAIModel()`.
-2. In `.env`, add `OPENAI_API_KEY=your_key_here` (Groq's line can stay or go).
-
-No changes to `agent.py` are ever needed — that's the point of the `ChatModel` abstraction.
+## Author
+Suriya S
